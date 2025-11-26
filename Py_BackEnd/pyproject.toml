@@ -3,5 +3,12 @@ name = "py-backend"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-requires-python = ">=3.14"
-dependencies = []
+requires-python = "==3.13" # no 3.14 due to pypika dependency
+dependencies = [
+    "chromadb==1.3.5",
+    "fastapi>=0.122.0",
+    "ipython>=9.7.0",
+    "jupyter>=1.1.1",
+    "smolagents>=1.23.0",
+    "uvicorn>=0.38.0",
+]
