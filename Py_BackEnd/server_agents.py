@@ -1,7 +1,8 @@
 import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
-from fastapi_logging_logging_utils import LoggingMiddleware, create_custom_filter_logger
+from http import HTTPStatus
+import fastapi_logging_logging_utils as log_utils
 
 from smolagents import (
     tool,
@@ -9,10 +10,11 @@ from smolagents import (
     InferenceClientModel,
     DuckDuckGoSearchTool,
     VisitWebpageTool,
+    FinalAnswerTool,
 )
 
 ## SETUP LOGGING w. injected contextVar log ids
-logger = create_custom_filter_logger()
+logger = log_utils.create_custom_filter_logger("agents")
 
 
 ## SETUP smolagents manager & data agent
@@ -33,7 +35,7 @@ rag_agent = CodeAgent(
 manager_agent = CodeAgent(
     model=InferenceClientModel(),
     managed_agents=[rag_agent],
-    tools=[],
+    tools=[FinalAnswerTool()],
     planning_interval=5,
     verbosity_level=2,
     final_answer_checks=[],
@@ -44,7 +46,12 @@ manager_agent = CodeAgent(
 ## APP
 app = FastAPI()
 # add custom logging middleware that uses a ContextVar for per-request log ids
-app.add_middleware(LoggingMiddleware)
+app.add_middleware(log_utils.LoggingMiddleware)
+
+
+@app.get("/health")
+async def health():
+    return HTTPStatus.OK
 
 
 class RagRequest(BaseModel):
