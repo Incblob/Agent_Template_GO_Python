@@ -36,7 +36,7 @@ def read_text_files(TEXT_FILES: str) -> List[Tuple[str, str]]:
     text_files = listdir(TEXT_FILES)
     text_read: List[Tuple[str, str]] = []
     for file in text_files:
-        with open(TEXT_FILES + "/" + file) as f:
+        with open(TEXT_FILES + "/" + file, encoding="utf-8") as f:
             text_read.append((file.replace(".txt", ""), f.read()))
     return text_read
 

@@ -34,6 +34,14 @@ collection.add(
 )
 
 # %%
+## testinmport chromadb
+from pprint import pprint
+
+CHROMA_DIR = "./data/chroma/"
+COLLECTION_NAME = "python_wiki"
+client = chromadb.PersistentClient(CHROMA_DIR)
+collection = client.get_collection(COLLECTION_NAME)
+
 results = collection.query(
     query_texts=["python taxonomy"],
     n_results=5,
@@ -45,5 +53,8 @@ results["documents"] = results["documents"][0]  # some cleanup
 pprint(
     [(x, y) for (x, y) in zip(results["distances"], results["documents"]) if x < 0.9]
 )
+# %%
+# %%
+# %%
 # %%
 # %%
