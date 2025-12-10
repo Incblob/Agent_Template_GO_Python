@@ -1,8 +1,10 @@
 # %%
+# Setup db from sqlite
 import chromadb
 import sqlite3
 import logging
 from pprint import pprint
+from os import rmdir, mkdir
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -20,11 +22,18 @@ except sqlite3.Error as e:
     logger.error("SQL error, stopping: ", e)
     exit()
 
+# %%
+# Delete existing collection
+rmdir(CHROMA_DIR)
+mkdir(CHROMA_DIR)
+
+# %%
+
 logger.info("starting Chroma client")
 client = chromadb.PersistentClient(CHROMA_DIR)
 
 logger.info("creating Chroma collection")
-collection = client.create_collection(name=COLLECTION_NAME)
+collection = client.create_collection(name=COLLECTION_NAME, get_or_create=True)
 
 logger.info("Adding Data to Chroma collection")
 collection.add(
@@ -34,7 +43,7 @@ collection.add(
 )
 
 # %%
-## testinmport chromadb
+# Testing
 from pprint import pprint
 
 CHROMA_DIR = "./data/chroma/"

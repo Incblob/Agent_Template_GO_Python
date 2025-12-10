@@ -2,35 +2,34 @@ from contextvars import ContextVar
 import logging
 
 # create an async variable to store the id
-context_id: ContextVar[str] = ContextVar("context_id", default="NO REQ")
-
+context_id: ContextVar[str] = ContextVar("context_id", default="NoID")
 
 def create_custom_filter_logger(name: str, level: int = logging.INFO):
     if name in logging.Logger.manager.loggerDict.keys():
         logging.warning(
-            f" 💬 Logger name '{name}' already exists, skipping creting new logger"
+            f" 💬 Logger name '{name}' already exists, skipping creating new logger"
         )
         return logging.getLogger(name)
-
-    class ContextIDFilter(logging.Filter):
+    class ContextIDFilter(logging.Filter) :
         """
         Injects the local context_id variable from the FastAPI middleware into the log record
         """
 
         def filter(self, record: logging.LogRecord) -> bool:
             setattr(record, "id", context_id.get())
-            # record.id = context_id.get()
             return True
 
     logger = logging.getLogger(name)
     logger.setLevel(level)
     handler = logging.StreamHandler()
-    handler.formatter = logging.Formatter(
-        "%(asctime)s [%(levelname)s] %(id)s: %(message)s"
-    )
+    handler.setFormatter(logging.Formatter(
+        "💬 %(asctime)s [%(levelname)s] %(id)s: %(message)s"
+    ))
     handler.addFilter(ContextIDFilter())  # remember to instantiate the class
     logger.handlers = []
     logger.addHandler(handler)
+
+    logger.debug(f"💬 created logger {name}")
 
     return logger
 
@@ -38,7 +37,6 @@ def create_custom_filter_logger(name: str, level: int = logging.INFO):
 from fastapi import Request, Response
 from starlette.middleware.base import BaseHTTPMiddleware
 from uuid import uuid4
-
 
 # middleware to catch all http requests and set a local id
 # we could also create a router with base functionality for logging and health endpoints,
