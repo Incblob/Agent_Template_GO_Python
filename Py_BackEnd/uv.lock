@@ -499,7 +499,7 @@ wheels = [
 
 [[package]]
 name = "fastapi"
-version = "0.122.0"
+version = "0.124.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "annotated-doc" },
@@ -507,9 +507,9 @@ dependencies = [
     { name = "starlette" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/b2/de/3ee97a4f6ffef1fb70bf20561e4f88531633bb5045dc6cebc0f8471f764d/fastapi-0.122.0.tar.gz", hash = "sha256:cd9b5352031f93773228af8b4c443eedc2ac2aa74b27780387b853c3726fb94b", size = 346436, upload-time = "2025-11-24T19:17:47.95Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a1/cd/51b0df6347fc5205ea2b7cff6f1299c2112ad2a0abc0183f86f9a32b3f96/fastapi-0.124.1.tar.gz", hash = "sha256:659166e4d3c19b26e1e77bfd64d649f64233dcc47677a97a822f38cefb64db47", size = 361493, upload-time = "2025-12-10T10:40:26.517Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7a/93/aa8072af4ff37b795f6bbf43dcaf61115f40f49935c7dbb180c9afc3f421/fastapi-0.122.0-py3-none-any.whl", hash = "sha256:a456e8915dfc6c8914a50d9651133bd47ec96d331c5b44600baa635538a30d67", size = 110671, upload-time = "2025-11-24T19:17:45.96Z" },
+    { url = "https://files.pythonhosted.org/packages/aa/18/39a6e0f8ed7a9e202e415c142ecfb3d79f8f3d1d9eb8f040b889bbae0b8c/fastapi-0.124.1-py3-none-any.whl", hash = "sha256:c8a2deaa03837e5694eaf1eb538b7637abd86f25973cbaf9d51525e5c03a967a", size = 112634, upload-time = "2025-12-10T10:40:24.741Z" },
 ]
 
 [[package]]
@@ -808,7 +808,7 @@ wheels = [
 
 [[package]]
 name = "ipython"
-version = "9.7.0"
+version = "9.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "colorama", marker = "sys_platform == 'win32'" },
@@ -822,9 +822,9 @@ dependencies = [
     { name = "stack-data" },
     { name = "traitlets" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/29/e6/48c74d54039241a456add616464ea28c6ebf782e4110d419411b83dae06f/ipython-9.7.0.tar.gz", hash = "sha256:5f6de88c905a566c6a9d6c400a8fed54a638e1f7543d17aae2551133216b1e4e", size = 4422115, upload-time = "2025-11-05T12:18:54.646Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/12/51/a703c030f4928646d390b4971af4938a1b10c9dfce694f0d99a0bb073cb2/ipython-9.8.0.tar.gz", hash = "sha256:8e4ce129a627eb9dd221c41b1d2cdaed4ef7c9da8c17c63f6f578fe231141f83", size = 4424940, upload-time = "2025-12-03T10:18:24.353Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/05/aa/62893d6a591d337aa59dcc4c6f6c842f1fe20cd72c8c5c1f980255243252/ipython-9.7.0-py3-none-any.whl", hash = "sha256:bce8ac85eb9521adc94e1845b4c03d88365fd6ac2f4908ec4ed1eb1b0a065f9f", size = 618911, upload-time = "2025-11-05T12:18:52.484Z" },
+    { url = "https://files.pythonhosted.org/packages/f1/df/8ee1c5dd1e3308b5d5b2f2dfea323bb2f3827da8d654abb6642051199049/ipython-9.8.0-py3-none-any.whl", hash = "sha256:ebe6d1d58d7d988fbf23ff8ff6d8e1622cfdb194daf4b7b73b792c4ec3b85385", size = 621374, upload-time = "2025-12-03T10:18:22.335Z" },
 ]
 
 [[package]]
@@ -1775,6 +1775,7 @@ dependencies = [
     { name = "chromadb" },
     { name = "ddgs" },
     { name = "fastapi" },
+    { name = "ipykernel" },
     { name = "ipython" },
     { name = "jupyter" },
     { name = "requests" },
@@ -1787,8 +1788,9 @@ dependencies = [
 requires-dist = [
     { name = "chromadb", specifier = "==1.3.5" },
     { name = "ddgs", specifier = ">=9.9.2" },
-    { name = "fastapi", specifier = ">=0.122.0" },
-    { name = "ipython", specifier = ">=9.7.0" },
+    { name = "fastapi", specifier = ">=0.124.1" },
+    { name = "ipykernel", specifier = ">=7.1.0" },
+    { name = "ipython", specifier = ">=9.8.0" },
     { name = "jupyter", specifier = ">=1.1.1" },
     { name = "requests", specifier = ">=2.32.5" },
     { name = "smolagents", specifier = ">=1.23.0" },

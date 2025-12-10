@@ -5,6 +5,7 @@ import sqlite3
 import logging
 from pprint import pprint
 from os import rmdir, mkdir
+from os.path import exists
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
@@ -24,11 +25,11 @@ except sqlite3.Error as e:
 
 # %%
 # Delete existing collection
-rmdir(CHROMA_DIR)
-mkdir(CHROMA_DIR)
+if exists(CHROMA_DIR):
+    rmdir(CHROMA_DIR)
+    mkdir(CHROMA_DIR)
 
 # %%
-
 logger.info("starting Chroma client")
 client = chromadb.PersistentClient(CHROMA_DIR)
 
@@ -44,24 +45,24 @@ collection.add(
 
 # %%
 # Testing
-from pprint import pprint
+# from pprint import pprint
 
-CHROMA_DIR = "./data/chroma/"
-COLLECTION_NAME = "python_wiki"
-client = chromadb.PersistentClient(CHROMA_DIR)
-collection = client.get_collection(COLLECTION_NAME)
+# CHROMA_DIR = "./data/chroma/"
+# COLLECTION_NAME = "python_wiki"
+# client = chromadb.PersistentClient(CHROMA_DIR)
+# collection = client.get_collection(COLLECTION_NAME)
 
-results = collection.query(
-    query_texts=["python taxonomy"],
-    n_results=5,
-    include=["documents", "distances"],
-)
-results["distances"] = results["distances"][0]  # some cleanup
-results["documents"] = results["documents"][0]  # some cleanup
-# filtering
-pprint(
-    [(x, y) for (x, y) in zip(results["distances"], results["documents"]) if x < 0.9]
-)
+# results = collection.query(
+#     query_texts=["python taxonomy"],
+#     n_results=5,
+#     include=["documents", "distances"],
+# )
+# results["distances"] = results["distances"][0]  # some cleanup
+# results["documents"] = results["documents"][0]  # some cleanup
+# # filtering
+# pprint(
+#     [(x, y) for (x, y) in zip(results["distances"], results["documents"]) if x < 0.9]
+# )
 # %%
 # %%
 # %%
