@@ -12,6 +12,8 @@ Of these:
 
 [fastapi_logging_utils.py](./fastapi_logging_utils.py) contains utilities for injecting unique ids into requests coming into fastapi endpoints. (see [Explanation](#request-id-injection))
 
+[utils.py](./utils.py) contains the function to request data from the vector db.
+
 Main libraries:
 
 - FastAPI
