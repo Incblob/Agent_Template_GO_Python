@@ -1,0 +1,7 @@
+./.venv
+./.zed
+_pycache_
+./
+./data/chroma/*
+./data/sqlite/*
+./run.sh

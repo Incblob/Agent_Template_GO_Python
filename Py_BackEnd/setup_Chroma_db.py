@@ -3,7 +3,6 @@
 import chromadb
 import sqlite3
 import logging
-from pprint import pprint
 from os import rmdir, mkdir
 from os.path import exists
 

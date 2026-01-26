@@ -1,10 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"net/http"
-	"net/url"
 	"strings"
 	"time"
 
@@ -96,12 +97,21 @@ func askAgentAPI(c *gin.Context) {
 		return
 	}
 
-	response, err := http.PostForm(AGENT_URL, url.Values{"query": {requestbody.Query}})
+	// make json
+	j_req, err := json.Marshal(requestbody)
+	if err != nil {
+		fmt.Printf("Error marshaling JSON: %v\n", err)
+	}
+
+	response, err := http.Post(
+		AGENT_URL, "application/json",
+		bytes.NewBuffer(j_req),
+	)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 		return
 	}
 	defer response.Body.Close()
 
-	c.JSON(http.StatusOK, response)
+	c.JSON(http.StatusOK, gin.H{"agent_response": response})
 }

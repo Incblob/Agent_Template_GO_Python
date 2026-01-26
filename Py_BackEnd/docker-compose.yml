@@ -1,0 +1,14 @@
+services:
+  agents:
+    build:
+      context: .
+      dockerfile: dockerfile.agents
+    ports:
+      - "8000:8000"
+
+  db:
+    build:
+      context: .
+      dockerfile: dockerfile.db
+    ports:
+      - "9000:9000"
