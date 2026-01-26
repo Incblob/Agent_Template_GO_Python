@@ -50,3 +50,8 @@ Using a ContextVar as an ID, we can use a custom Filter in the logging handler t
 Then, we can add a middleware function to the FastAPI app which changes the ID(ContextVar) for each HTTP request.
 
 Since ContextVars are isolated to each async process, every log for a given request will contain the same ID. This can be further customized in formatting (such as adding details from the request itself), but in this case a minimal example was used.
+
+## Docker
+
+Two containers are created with a docker compose service, one for the agents and one for the db.
+The db communicate via internal docker compose connections with the agentic container which is open to external requests.

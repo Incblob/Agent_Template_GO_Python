@@ -4,11 +4,30 @@ services:
       context: .
       dockerfile: dockerfile.agents
     ports:
-      - "8000:8000"
+      - "${AGENTS_PORT:-8000}:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    environment:
+      - DB_HOST=db
+      - DB_PORT=9000
+    networks:
+      - app_network
 
   db:
     build:
       context: .
       dockerfile: dockerfile.db
-    ports:
-      - "9000:9000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

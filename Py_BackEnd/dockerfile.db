@@ -13,6 +13,6 @@ ENV PYTHONUNBUFFERED=1
 RUN python setup_sqlite_db.py
 RUN python setup_Chroma_db.py
 
-EXPOSE 9000
+# EXPOSE 9000
 
 CMD ["fastapi", "run", "server_rag.py", "--port", "9000"]

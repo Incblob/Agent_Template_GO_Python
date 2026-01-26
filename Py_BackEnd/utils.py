@@ -4,8 +4,18 @@ from requests import HTTPError, RequestException, Timeout, post, ConnectionError
 from requests import Response as PostResponse
 from http import HTTPStatus
 from logging import getLogger
+from os import getenv
 
 logger = getLogger("agents_server_logger")
+
+DB_HOST = getenv("DB_HOST")
+assert DB_HOST
+DB_PORT = getenv("DB_PORT")
+assert DB_PORT
+
+DB_PATH: str = (
+    "http://" + DB_HOST + ":" + DB_PORT + "/get_documents"
+)  # use the container id for connecting from container to container
 
 
 def document_request(
@@ -34,7 +44,8 @@ def document_request(
 
     try:
         response: PostResponse = post(
-            "http://db:9000/get_documents",  # use the container id for connecting from container to container
+            DB_PATH,
+            # "http://db:9000/get_documents",  # use the container id for connecting from container to container
             json=req_body,
             headers={"Content-type": "application/json"},
             timeout=10,
