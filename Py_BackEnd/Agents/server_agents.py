@@ -8,8 +8,8 @@ from http import HTTPStatus
 from fastapi_logging_utils import create_custom_filter_logger, LoggingMiddleware
 from logging import DEBUG
 from contextlib import asynccontextmanager
-from smolagent_class import create_agent_class
-from utils import document_request
+from Py_BackEnd.Agents.smolagent_class import create_agent_class
+from Py_BackEnd.Agents.utils import document_request
 
 
 # create logger w. lifetime event

@@ -2,7 +2,7 @@ services:
   agents:
     build:
       context: .
-      dockerfile: dockerfile.agents
+      dockerfile: Agents/dockerfile.agents
     ports:
       - "${AGENTS_PORT:-8000}:8000"
     healthcheck:
@@ -19,7 +19,7 @@ services:
   db:
     build:
       context: .
-      dockerfile: dockerfile.db
+      dockerfile: Database/dockerfile.db
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
       interval: 30s

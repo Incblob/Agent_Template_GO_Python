@@ -15,7 +15,7 @@ from smolagents import (
     WikipediaSearchTool,
 )
 
-from utils import document_request
+from Py_BackEnd.Agents.utils import document_request
 
 
 class SmolAgentMulti:
